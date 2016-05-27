@@ -1,0 +1,14 @@
+{
+  "name": "docker-semaphore",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {},
+  "dependencies": {
+    "commander": "^2.9.0",
+    "js-yaml": "^3.6.1",
+    "q": "^1.4.1",
+    "ramda": "^0.21.0",
+    "semaphore-api": "^1.0.1"
+  },
+  "devDependencies": {}
+}
