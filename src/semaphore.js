@@ -51,6 +51,12 @@ const builds   = type => promisefy ((...args) =>        semaphore.builds   (args
 const branches = type => promisefy ((...args) => type ? semaphore.branches (args[0])[type] (...args.slice (1))
                                                       : semaphore.branches                 (...args));
 
+const pick = keys => {
+    // pick requires: (value, key) => true or false
+    return r.pickBy (r.isEmpty (keys) ?            r.always
+                                      : r.compose (r.partialRight (r.contains, [keys]), r.nthArg (1)))
+};
+
 const search = name => {
     return projects ().then (response => response.find (project => project.name === name));
 };
@@ -60,10 +66,11 @@ module.exports = {
     get general () {
         return trydie ((cmd, project, options) => { // destructuring would be nice
            const branch = options.branch;
+           const attributes = options.attributes;
 
-           if (cmd === 'branch') return search (project).get ('hash_id').then (      branches (   )             ).then (print).done ();
+           if (cmd === 'branch') return search (project).get ('hash_id').then (      branches (   )             ).then (pick (attributes)).then (print).done ();
            else
-                                 return search (project).get ('hash_id').then (id => branches (cmd) (id, branch)).then (print).done ();
+                                 return search (project).get ('hash_id').then (id => branches (cmd) (id, branch)).then (pick (attributes)).then (print).done ();
        });
     },
 
@@ -71,8 +78,9 @@ module.exports = {
         return trydie ((cmd, project, options) => { // destructuring would be nice
            const branch  = options.branch;
            const build   = options.build;
+           const attributes = options.attributes;
 
-           return search (project).get ('hash_id').then (id => builds (cmd) (id, branch, build)).then (print).done ();
+           return search (project).get ('hash_id').then (id => builds (cmd) (id, branch, build)).then (pick (attributes)).then (print).done ();
        });
     }
 
