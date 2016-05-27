@@ -2,7 +2,9 @@
   "name": "docker-semaphore",
   "version": "0.0.0",
   "private": true,
-  "bin": {},
+  "bin": {
+     "semaphore" : "bin/semaphore-cli.js"
+  },
   "scripts": {
      "prepublish": "node_modules/.bin/babel src -d dist"
   },
