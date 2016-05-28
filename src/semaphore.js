@@ -7,44 +7,16 @@
  */
 'use strict';
 
-const debug   = (...args) => console.log (...args);
+const { die, print, trydie, promisefy } = require ('./utility');
 
 const q         = require ('q');
 const r         = require ('ramda');
-const yaml      = require ('js-yaml');
-
-const print   = r.compose (debug, yaml.dump);
-const die     = r.compose (() => process.exit (1), print, r.partial (r.props, [['statusCode', 'body']]));
-
 const semaphore = require ('semaphore-api') ({ logger : console }).withOptions ({
     authToken    : process.env['SEMAPHORECI_API_KEY'],
     errorHandler : die
 });
 
 q.onerror = e => die ({ statusCode : 0, body : e.message });
-
-const trydie = callback => {
-    return function (...args) {
-       try {
-           callback (...args);
-       } catch                                 (e) {
-           return die ({ statusCode : 0, body : e.message });
-       }
-    }
-};
-
-const promisefy = callback => {
-    return function () {
-        let deferred = q.defer ();
-
-        let args = [].slice.call (arguments);
-            args.push (deferred.resolve);
-
-        callback (...args);
-
-        return deferred.promise;
-    }
-};
 
 const projects =         promisefy ((...args) =>        semaphore.projects                 (...args));
 const builds   = type => promisefy ((...args) =>        semaphore.builds   (args[0])[type] (...args.slice (1)));
