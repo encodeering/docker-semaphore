@@ -23,13 +23,10 @@ module.exports = {
     print,
 
     promisefy (callback) {
-        return function () {
+        return function (...args) {
             let deferred = q.defer ();
 
-            let args = [].slice.call (arguments);
-                args.push (deferred.resolve);
-
-            callback (...args);
+            q.fcall (callback, ...args, deferred.resolve).fail (deferred.reject);
 
             return deferred.promise;
         }
