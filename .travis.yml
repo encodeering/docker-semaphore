@@ -1,0 +1,32 @@
+language: bash
+
+sudo: required
+
+services:
+- docker
+
+env:
+  global:
+    - secure: DS2+Grj4/ol6Xcj7ZnEAOBPp8ETmI32o7rntgnk7UeoUTBp24Nm/mvoQ4bnX5JGWHwT/T2Orl/NZbNyRVubFE76J9bT9DEDlSdfdsMXvFqk3ouN2Q0LQsd/TvvuTWS8P6qXsvTSZ1Cd2HeuNBS8VmzQhFhBPysQSaESVc/iI6eUvU7XSAvkOW3dpvIrkyiGDicMXnHey5rbfb/jht9UCCTQxFNbM5KeUd6faTdo8zHJZjjcNCn4BRbaK2lIAUatNm1hxroH463MVuiyqeTstF+NIgcMDAsHlQbFsRRSx/xWNFQcr/or0mPWOhdT3gF9IUGKmz9Y3gKlS0V34wPLFvZ3x4MW6BZOD0jLnGPmZIX35W7OLOp14Si1J4Se5voJcrKRsFD39ygu3AzbnzXNYsLOkqW4uCZhSQ/WL+zZoKzKf1bHNzFb7mZ46cux/YoV1lrSXL1rqMUiyDR70MwN9UuOnDiPeVw8YzAT83Dm5O0vQslSA28jvZC692HMIKdLLO5kydITN51Tjl2btao6LfhtJlNVFFca+w94jkMhjB7sHzMx/5mWKmw8g8Ozm5wW8ZqF+8XJkEZMi16eZiyvCBxwvAj/0XB1qU5Bbn1xODq9TM4eggxulRIVtF5egaxFnUjyI3GH2cFXV4dwHyKD+2l8ybf2qQ0GKYR+5vggjR8Y=
+    - secure: T6IsfVz9fdHzPHQidIUu39zNwNIF3AJPYnTuCHPzTY5t76ao3p35UMEyXuAs+aSNGStKowjIsJli9sa6jkXhCzmmdivrUIENEKSQiZwrRf/4TYQWwNr/G5dawTZ7K1LGMa0qWgj3up7NctPs0DIKRosLpDcZ92OOkKi97Gt6R82CGK/0Rnu+fPAc0+VSlS7IQnEFGMMv4oLPHVZ+pJEC759m8US/RfGfGtgHMrFlNJuPNTmB+ma1OGfoCY3z2Lgpu9deQDUnTRYjj0eDwzd+3gbmKOJjhEPN+X3IDtv61kWgAwj5vB51fmEaMkOG+HeTrHV8EmiwNUEHjBWlT78h7GK8LiCWgPguMmGicDhz4EowSvvY+Qar99qJhKRBU8dF5uXTYd2U87Gq4MBK/cz7kb01tZXdZ1ud4dENonFALOgj0Izye6dy+FSVOZSqChYJoIAqRmfOXiheTT4AArQBNQprM+igTHnE1Ak6d/sr2Bqf8qRgeNokscIT5jXkUaEHWCLWtaDQQXkwzFRmkTDzljna+6bHVFgSTCb4M+6g16LsTqiLR8hz52QVwUAl1gsQWla/R6cC38bOAtFjAKQwUbZDELtnAlHgcu28sX4ofgTNKqLdgFuyNP5nRaPFFMjiRjD78MQtsZh8z5hSqR5b0ah+XePzhmJ9bfnFthZNaXA=
+    - secure: nm7fhz2G6ZG5tBVaKHeyW/Yh4CA3FFj+rbKmK5vrQrphyEzXkc3T9nbX/pLklF90h3/Vl6iLpXTScLdvAp2UVZNyefj0YWqA1rbpDPYLWprPlEoJM0t7WV7Yq8hjxBcF04TQDQSgOC1H9S0d7H0jhEq7wsZ1SZpia5ov/V2LtRyYmdqIPfP6K0ST3iSTFKUDHXnOQ9CGENcxMWivwToOgrztN2rTNAAawySmXJ1nFgjRYN1fYw6XM/Yc6VyEQIiGLJBmH2vtOzn3Hl2M1vTPnsimR1DrwQmJ7ZmmAOF/ZrtteRnmfAsVoQZWiUHojvJjKnCFnr8IX4Dgr4Lg0MQ7XMgtVl5NWMLnevZVrDUjK04AOjKB+Ow6mFIHy0j1D5RUbHqJc5IJfGPShDzdtXWdQqp6jRovyI7/vblxrWSg/0ndlQeR+np1atU3jKAaVvaH66SDhkq7CiU4wqcAjdoAodqgmqS78XuasG6PXpjNtKDrbFTeh2dh6JsNu2NmSZIVFUkkB4t5cijKjD/0GzLZWP3LeajOg1lHb4Hj2gsqIT5Rq+i0nMwL8sc3ByOBL1QDJuzSq7vXnIyoboU0FuSMRCCSidmsSAIqOGLl9TfCHbor1tE/kt+Yc7rkHpEXyczWPDASVH/bHnRSjVm92SrcHvjxv1NKXuy9k4Im2PeEUFY=
+    - PROJECT="semaphore"
+    - REPOSITORY="encodeering"
+  matrix:
+    - ARCH=armhf VERSION=0.0.0
+    - ARCH=amd64 VERSION=0.0.0
+
+before_script:
+- sudo -E bash .travis/prepare.sh
+
+script:
+- sudo -E bash .travis/build.sh
+
+after_script:
+- docker images
+
+deploy:
+  script: sudo -E bash .travis/deploy.sh
+  provider: script
+  on:
+    branch: master
