@@ -16,3 +16,5 @@ npm install
 npm pack
 
 docker build -t "$TAG:$TAGSPECIFIER" contrib/mechanic
+
+docker run --rm "$TAG:$TAGSPECIFIER" semaphore --help
