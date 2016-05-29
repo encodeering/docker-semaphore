@@ -8,8 +8,8 @@ RUN        useradd -m -s /bin/bash -u 1000 -U mechanic
 
 COPY       docker-semaphore-*.tgz /tmp
 
-RUN        npm install -g /tmp/docker-semaphore-*.tgz \
- &&        rm             /tmp/docker-semaphore-*.tgz
+RUN        npm install --unsafe-perm -g /tmp/docker-semaphore-*.tgz \
+ &&        rm                           /tmp/docker-semaphore-*.tgz
 
 VOLUME     /usr/local/src
 
