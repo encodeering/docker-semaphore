@@ -26,6 +26,7 @@ after_script:
 - docker images
 
 deploy:
+  skip_cleanup: true
   script: sudo -E bash .travis/deploy.sh
   provider: script
   on:
