@@ -12,15 +12,15 @@ let r         = require ('ramda');
 let program   = require ('commander');
 let semaphore = require ('../dist/semaphore');
 
-program.command ('general <cmd> <project>')
+program.command ('project <cmd> <project>')
        .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--attributes [list]', '', r.split (','), [])
-       .action  (semaphore.general).on ('--help', function () {
+       .action  (semaphore.project).on ('--help', function () {
            debug ('  Examples:');
            debug ('');
-           debug ('    $ general branch                    <project>');
-           debug ('    $ general status  [--branch=master] <project>');
-           debug ('    $ general history [--branch=master] <project>');
+           debug ('    $ project branch                    <project>');
+           debug ('    $ project status  [--branch=master] <project>');
+           debug ('    $ project history [--branch=master] <project>');
            debug ('');
        });
 
