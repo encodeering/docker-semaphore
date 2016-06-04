@@ -35,7 +35,7 @@ const search = name => {
 
 module.exports = {
 
-    get general () {
+    get project () {
         return trydie ((cmd, project, options) => { // destructuring would be nice
            const branch = options.branch;
            const attributes = options.attributes;
@@ -46,7 +46,7 @@ module.exports = {
        });
     },
 
-    get build () {
+    get job () {
         return trydie ((cmd, project, options) => { // destructuring would be nice
            const branch  = options.branch;
            const build   = options.build;

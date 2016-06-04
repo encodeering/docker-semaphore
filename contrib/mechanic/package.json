@@ -1,11 +1,12 @@
 {
   "name": "docker-semaphore",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "files" : [ "bin", "dist" ],
   "bin": {
      "semaphore" : "bin/semaphore-cli.js"
   },
+  "main": "index.js",
   "scripts": {
      "prepublish": "node_modules/.bin/babel src -d dist"
   },

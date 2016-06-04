@@ -10,33 +10,33 @@
 
 let r         = require ('ramda');
 let program   = require ('commander');
-let semaphore = require ('../dist/semaphore');
+let semaphore = require ('..');
 
-program.command ('general <cmd> <project>')
-       .option  ('--branch <string>', '', r.identity, 'master')
+program.command ('project <cmd> <project>')
+       .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--attributes [list]', '', r.split (','), [])
-       .action  (semaphore.general).on ('--help', function () {
+       .action  (semaphore.project).on ('--help', function () {
            debug ('  Examples:');
            debug ('');
-           debug ('    $ general branch                    <project>');
-           debug ('    $ general status  [--branch=master] <project>');
-           debug ('    $ general history [--branch=master] <project>');
+           debug ('    $ project branch                    <project>');
+           debug ('    $ project status  [--branch=master] <project>');
+           debug ('    $ project history [--branch=master] <project>');
            debug ('');
        });
 
-program.command ('build <cmd> <project>')
-       .option  ('--branch <string>', '', r.identity, 'master')
+program.command ('job <cmd> <project>')
+       .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--build <number>',  '', parseInt)
        .option  ('--attributes [list]', '', r.split (','), [])
-       .action  (semaphore.build).on ('--help', function () {
+       .action  (semaphore.job).on ('--help', function () {
            debug ('  Examples:');
            debug ('');
-           debug ('    $ build info    [--branch=master] --build=1 <project>');
-           debug ('    $ build log     [--branch=master] --build=1 <project>');
-           debug ('    $ build rebuild [--branch=master] --build=1 <project>');
-           debug ('    $ build launch  [--branch=master] --build=1 <project>');
-           debug ('    $ build deploy  [--branch=master] --build=1 <project>');
-           debug ('    $ build stop    [--branch=master] --build=1 <project>');
+           debug ('    $ job info    [--branch=master] --build=1 <project>');
+           debug ('    $ job log     [--branch=master] --build=1 <project>');
+           debug ('    $ job rebuild [--branch=master] --build=1 <project>');
+           debug ('    $ job launch  [--branch=master] --build=1 <project>');
+           debug ('    $ job deploy  [--branch=master] --build=1 <project>');
+           debug ('    $ job stop    [--branch=master] --build=1 <project>');
            debug ('');
        });
 
