@@ -24,19 +24,19 @@ program.command ('project <cmd> <project>')
            debug ('');
        });
 
-program.command ('build <cmd> <project>')
+program.command ('job <cmd> <project>')
        .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--build <number>',  '', parseInt)
        .option  ('--attributes [list]', '', r.split (','), [])
-       .action  (semaphore.build).on ('--help', function () {
+       .action  (semaphore.job).on ('--help', function () {
            debug ('  Examples:');
            debug ('');
-           debug ('    $ build info    [--branch=master] --build=1 <project>');
-           debug ('    $ build log     [--branch=master] --build=1 <project>');
-           debug ('    $ build rebuild [--branch=master] --build=1 <project>');
-           debug ('    $ build launch  [--branch=master] --build=1 <project>');
-           debug ('    $ build deploy  [--branch=master] --build=1 <project>');
-           debug ('    $ build stop    [--branch=master] --build=1 <project>');
+           debug ('    $ job info    [--branch=master] --build=1 <project>');
+           debug ('    $ job log     [--branch=master] --build=1 <project>');
+           debug ('    $ job rebuild [--branch=master] --build=1 <project>');
+           debug ('    $ job launch  [--branch=master] --build=1 <project>');
+           debug ('    $ job deploy  [--branch=master] --build=1 <project>');
+           debug ('    $ job stop    [--branch=master] --build=1 <project>');
            debug ('');
        });
 
