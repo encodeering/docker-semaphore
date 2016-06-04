@@ -6,6 +6,7 @@
   "bin": {
      "semaphore" : "bin/semaphore-cli.js"
   },
+  "main": "index.js",
   "scripts": {
      "prepublish": "node_modules/.bin/babel src -d dist"
   },

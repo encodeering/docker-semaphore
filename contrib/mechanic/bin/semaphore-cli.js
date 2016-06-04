@@ -10,7 +10,7 @@
 
 let r         = require ('ramda');
 let program   = require ('commander');
-let semaphore = require ('../dist/semaphore');
+let semaphore = require ('..');
 
 program.command ('project <cmd> <project>')
        .option  ('--branch [string]', '', r.identity, 'master')
