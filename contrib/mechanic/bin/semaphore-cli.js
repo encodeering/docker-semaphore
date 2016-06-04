@@ -13,7 +13,7 @@ let program   = require ('commander');
 let semaphore = require ('../dist/semaphore');
 
 program.command ('general <cmd> <project>')
-       .option  ('--branch <string>', '', r.identity, 'master')
+       .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--attributes [list]', '', r.split (','), [])
        .action  (semaphore.general).on ('--help', function () {
            debug ('  Examples:');
@@ -25,7 +25,7 @@ program.command ('general <cmd> <project>')
        });
 
 program.command ('build <cmd> <project>')
-       .option  ('--branch <string>', '', r.identity, 'master')
+       .option  ('--branch [string]', '', r.identity, 'master')
        .option  ('--build <number>',  '', parseInt)
        .option  ('--attributes [list]', '', r.split (','), [])
        .action  (semaphore.build).on ('--help', function () {
