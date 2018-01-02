@@ -17,17 +17,20 @@ env:
     - ARCH=armhf VERSION=0.1.0
     - ARCH=amd64 VERSION=0.1.0
 
+install:
+- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.4
+
 before_script:
-- sudo -E bash .travis/prepare.sh
+- sudo -E bash ./module.sh "." "./setup.sh"
 
 script:
-- sudo -E bash .travis/build.sh
+- sudo -E bash ./module.sh "modules" "./build.sh"
 
 after_script:
 - docker images
 
 deploy:
-  script: sudo -E bash .travis/deploy.sh
+  script: sudo -E bash ./module.sh "." "./release.sh"
   provider: script
   skip_cleanup: true
   on:
