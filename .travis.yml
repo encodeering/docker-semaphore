@@ -26,8 +26,8 @@ after_script:
 - docker images
 
 deploy:
-  skip_cleanup: true
   script: sudo -E bash .travis/deploy.sh
   provider: script
+  skip_cleanup: true
   on:
-    branch: master
+    all_branches: true
