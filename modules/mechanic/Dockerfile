@@ -1,10 +1,10 @@
-FROM       node:4.4.3
+FROM       node:4.8
 
 MAINTAINER Michael Clausen <encodeering@gmail.com>
 
 ENV        SEMAPHORECI_API_KEY=secret
 
-RUN        useradd -m -s /bin/bash -u 1000 -U mechanic
+RUN        useradd -m -s /bin/bash -u 1001 -U mechanic
 
 COPY       docker-semaphore-*.tgz /tmp
 

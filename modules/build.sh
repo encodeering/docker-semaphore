@@ -5,10 +5,10 @@ set -e
 import com.encodeering.docker.config
 import com.encodeering.docker.docker
 
-docker-pull "$REPOSITORY/node-$ARCH:4.4.3" "node:4.4.3"
+docker-pull "$REPOSITORY/node-$ARCH:4.8-debian" "node:4.8"
 
 npm () {
-    docker run --rm -v $(pwd)/mechanic:/usr/local/src -w /usr/local/src -e NPM_CONFIG_LOGLEVEL=info node:4.4.3 npm --unsafe-perm $@
+    docker run --rm -v $(pwd)/mechanic:/usr/local/src -w /usr/local/src -e NPM_CONFIG_LOGLEVEL=info node:4.8 npm --unsafe-perm $@
 }
 
 npm install
