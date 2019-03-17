@@ -17,3 +17,4 @@ npm pack
 docker-build mechanic
 
 docker-verify semaphore --help
+docker-verify npm -g ls docker-semaphore | dup | contains "@${VERSION}"
