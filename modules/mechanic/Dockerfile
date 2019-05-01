@@ -1,4 +1,4 @@
-FROM       node:4.8
+FROM       node:8.16
 
 MAINTAINER Michael Clausen <encodeering@gmail.com>
 

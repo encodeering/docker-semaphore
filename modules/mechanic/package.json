@@ -2,13 +2,16 @@
   "name": "docker-semaphore",
   "version": "0.1.0",
   "private": true,
-  "files" : [ "bin", "dist" ],
+  "files": [
+    "bin",
+    "dist"
+  ],
   "bin": {
-     "semaphore" : "bin/semaphore-cli.js"
+    "semaphore": "bin/semaphore-cli.js"
   },
   "main": "index.js",
   "scripts": {
-     "prepublish": "node_modules/.bin/babel src -d dist"
+    "prepare": "node_modules/.bin/babel src -d dist"
   },
   "dependencies": {
     "commander": "^2.9.0",
@@ -18,7 +21,8 @@
     "semaphore-api": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1"
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
   }
 }
