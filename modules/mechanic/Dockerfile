@@ -17,6 +17,4 @@ WORKDIR    /usr/local/src
 
 USER       mechanic
 
-ENTRYPOINT ["docker-exec"]
-
 CMD        ["semaphore", "--help"]
